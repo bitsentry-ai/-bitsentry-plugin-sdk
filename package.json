@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "packageManager": "pnpm@10.32.1",
   "main": "./dist/index.js",
+  "module": "./dist/esm/index.js",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "files": [
@@ -13,11 +14,13 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/index.js",
       "default": "./dist/index.js"
     }
   },
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && tsc -p tsconfig.esm.json",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "lint": "eslint .",
