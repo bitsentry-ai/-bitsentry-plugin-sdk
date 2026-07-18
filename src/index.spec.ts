@@ -64,17 +64,19 @@ describe("@bitsentry/plugin-sdk", () => {
       summary: context.operation?.executionId ?? "no execution context",
     });
 
-    expect(handler({
-      pluginId: "example",
-      actionId: "ping",
-      auth: {},
-      input: {},
-      host: {
-        pluginRoot: "/tmp/example",
-        entryPath: "/tmp/example/plugin.js",
-        localPluginDirectories: [],
-        reloadPlugins: async () => {},
-      },
-    })).toMatchObject({ status: 200 });
+    expect(
+      handler({
+        pluginId: "example",
+        actionId: "ping",
+        auth: {},
+        input: {},
+        host: {
+          pluginRoot: "/tmp/example",
+          entryPath: "/tmp/example/plugin.js",
+          localPluginDirectories: [],
+          reloadPlugins: async () => {},
+        },
+      }),
+    ).toMatchObject({ status: 200 });
   });
 });
