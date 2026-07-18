@@ -284,12 +284,28 @@ export type DesktopPluginCodeHostContext = {
   reloadPlugins(): Promise<void>;
 };
 
+/**
+ * Non-serializable execution metadata supplied by the desktop host while an
+ * action is running. All fields are optional so plugins compiled against
+ * earlier SDK versions remain compatible with hosts that do not provide an
+ * operation context.
+ */
+export type DesktopPluginOperationContext = {
+  /** Aborts when the parent runbook, agent, or host operation is cancelled. */
+  signal?: AbortSignal;
+  /** Absolute Unix timestamp in milliseconds at which the host will time out. */
+  deadlineAt?: number;
+  /** Correlates plugin-side diagnostics with the parent execution. */
+  executionId?: string;
+};
+
 export type DesktopPluginCodeActionContext = {
   pluginId: string;
   actionId: string;
   auth: Record<string, unknown>;
   input: Record<string, unknown>;
   host: DesktopPluginCodeHostContext;
+  operation?: DesktopPluginOperationContext;
 };
 
 export type DesktopPluginCodeActionHandlerResult = {
